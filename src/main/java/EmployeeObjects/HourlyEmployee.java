@@ -3,6 +3,8 @@ package EmployeeObjects;
 import EmployeeBlueprints.Employee;
 import EmployeeBlueprints.EmployeeType;
 
+import java.text.DecimalFormat;
+
 /**
  * This holds information of the hourly wage and hours worked for an hourly employee in the system.
  * @author lhartman2
@@ -12,6 +14,7 @@ import EmployeeBlueprints.EmployeeType;
 public final class HourlyEmployee extends Employee {
     private double wage;
     private double hoursWorked;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     /**
      * Main constructor that takes on employee information.
@@ -72,13 +75,13 @@ public final class HourlyEmployee extends Employee {
     @Override
     public double calculateWeeklyPay()
     {
-        double pay = wage * hoursWorked;
+        double pay =wage * hoursWorked;
         if (hoursWorked > 40)
         {
-            pay = wage * 40 + (wage*1.25) * (hoursWorked-40);
+            pay = wage * 40 + (wage*1.5) * (hoursWorked-40);
         }
         
-        return pay;
+        return (double)Math.round(pay * 100)/100;
     }
 
     /**
